@@ -1,25 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [xxx, setXxx] = useState(0);
+
+  const increment = () => setCount(count + 1);
+  const decrement = () => setCount(count - 1);
+
+  const twoTimes = () => setCount(previousCount => previousCount * 2);
+
+  const onlyThree = () => {
+    if(count % 3 !== 0) {
+      console.log('割り切れない！');
+      return setXxx(0);
+    }
+    const value = count / 3;
+    return setXxx(value);
+  }
+
+  const reset = () => setCount(0);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <p>count: {count}</p>
+      <p>3で割った時のあれ。: {xxx}</p>
+      <button onClick={increment}>+1</button>
+      <button onClick={decrement}>-1</button>
+      <button onClick={twoTimes}>X2</button>
+      <button onClick={onlyThree}>3の倍数の時だけ3で割る</button>
+      <br></br>
+      <button onClick={reset}>reset</button>
+    </>
   );
 }
 
